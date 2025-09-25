@@ -4,7 +4,15 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { google } = require('googleapis');
 const twilio = require('twilio');
 const admin = require('firebase-admin');
-const serviceAccount = require('../../serviceAccountKey.json');
+// Lógica para cargar las credenciales dependiendo del entorno
+let serviceAccount;
+if (process.env.NODE_ENV === 'production') {
+    // En producción (Render), carga desde la ruta de los Secret Files
+    serviceAccount = require('/etc/secrets/serviceAccountKey.json');
+} else {
+    // En desarrollo (tu compu), carga desde la ruta local
+    serviceAccount = require('../../serviceAccountKey.json');
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
