@@ -1,0 +1,9 @@
+# Archivos de dependencias (muy importante)
+node_modules
+
+# Archivo de variables de entorno (contiene secretos)
+.env
+
+# Llave de servicio (contiene secretos)
+serviceAccountKey.json
+
